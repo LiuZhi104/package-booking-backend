@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 public class PackageServiceIml implements PackageService {
@@ -38,5 +39,11 @@ public class PackageServiceIml implements PackageService {
     public ResponseEntity getPickupPackage(Package packageone) {
         Package newPackage=packageRepository.save(packageone);
         return ResponseEntity.ok(newPackage);
+    }
+
+    @Override
+    public ResponseEntity getAllPickup(Date startTime) {
+        List<Package> packages=packageRepository.getAllPickup(startTime);
+        return  ResponseEntity.ok(packages);
     }
 }

@@ -76,6 +76,11 @@ public class PackageControllerTest {
         //then
         mockMvc.perform(post("/packages")).andExpect(MockMvcResultMatchers.status().isOk());
     }
-
+    public void should_return_all_pickup_when_give_startTime() throws Exception {
+        //given
+        //when
+        //then
+        mockMvc.perform(get("/pakages")).andExpect(MockMvcResultMatchers.status().isOk());
+    }
 
 }

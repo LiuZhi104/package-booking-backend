@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -29,8 +30,13 @@ public class PackageController {
         return packageService.updateQueryPackage(id);
     }
     @PostMapping("/packages")
-    public  ResponseEntity getPickupPackage(@RequestBody Package packageone){
+    public  ResponseEntity postPickupPackage(@RequestBody Package packageone){
        return  packageService.getPickupPackage(packageone);
     }
+    @GetMapping("/packages")
+    public  ResponseEntity getAllpickup(@RequestParam Date startTime){
+
+    }
+
 
 }

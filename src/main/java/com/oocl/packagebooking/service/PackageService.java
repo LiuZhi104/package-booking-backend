@@ -4,11 +4,14 @@ import com.oocl.packagebooking.model.Package;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 @Service
 public interface PackageService {
-    public List<Package> getAllPackages();
-    public List<Package> getQueryPackge(long id);
-    public ResponseEntity updateQueryPackage(long id);
-    public ResponseEntity getPickupPackage(Package packageone);
+     List<Package> getAllPackages();
+     List<Package> getQueryPackge(long id);
+    ResponseEntity updateQueryPackage(long id);
+    ResponseEntity getPickupPackage(Package packageone);
+    ResponseEntity getAllPickup(Date startTime);
+
 }
