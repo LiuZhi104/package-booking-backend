@@ -24,4 +24,19 @@ public class PackageServiceIml implements PackageService {
         return  queryPackages;
     }
 
+    @Override
+    public ResponseEntity updateQueryPackage(long id) {
+        int status=packageRepository.update(id);
+        Package packageone=packageRepository.findById(id).get();
+        if (status == 1) {
+            return ResponseEntity.ok(packageone);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @Override
+    public ResponseEntity getPickupPackage(Package packageone) {
+        Package newPackage=packageRepository.save(packageone);
+        return ResponseEntity.ok(newPackage);
+    }
 }

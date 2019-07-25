@@ -24,8 +24,13 @@ public class PackageController {
     public ResponseEntity getQueryPackages(@PathVariable long id){
         return  ResponseEntity.ok(packageService.getQueryPackge(id));
     }
-//    @PutMapping("/packages/{id}")
-//    public  ResponseEntity updateQueryPackage(@PathVariable long id, @RequestParam int status){
-//
-//    }
+    @PutMapping("/packages/{id}")
+    public  ResponseEntity updateQueryPackage(@PathVariable long id){
+        return packageService.updateQueryPackage(id);
+    }
+    @PostMapping("/packages")
+    public  ResponseEntity getPickupPackage(@RequestBody Package packageone){
+       return  packageService.getPickupPackage(packageone);
+    }
+
 }

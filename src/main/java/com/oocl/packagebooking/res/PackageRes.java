@@ -10,7 +10,6 @@ public class PackageRes {
     public void add(Package packageone){
         this.packages.add(packageone);
     }
-
     public List<Package> getPackages() {
         return packages;
     }
