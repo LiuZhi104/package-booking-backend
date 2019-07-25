@@ -82,5 +82,4 @@ public class PackageControllerTest {
         //then
         mockMvc.perform(get("/pakages")).andExpect(MockMvcResultMatchers.status().isOk());
     }
-
 }

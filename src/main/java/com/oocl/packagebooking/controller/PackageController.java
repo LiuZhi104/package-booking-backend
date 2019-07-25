@@ -35,7 +35,7 @@ public class PackageController {
     }
     @GetMapping("/packages")
     public  ResponseEntity getAllpickup(@RequestParam Date startTime){
-
+        return packageService.getAllPickup(startTime);
     }
 
 
