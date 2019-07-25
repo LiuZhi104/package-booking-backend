@@ -62,20 +62,20 @@ public class PackageControllerTest {
         //then
         mockMvc.perform(put("/packages/1")).andExpect(MockMvcResultMatchers.status().isOk());
     }
-//    public  void should_return_pickup_packages_when_give_package_id() throws Exception {
-//        //given
-//        List<Package> mocklist=new ArrayList<>();
-//        Package packageone=new Package(1,"ZHANGSAN","199999999999",1,new Date());
-//        Package packagetwo=new Package(2,"ZHANGSAN","197742984320",0,new Date());
-//        Package packagethree=new Package(3,"ZHANGSAN","18312463499",0,new Date());
-//        mocklist.add(packageone);
-//        mocklist.add(packagetwo);
-//        mocklist.add(packagethree);
-//        //when
-//        Mockito.when(packageRes.getPackages()).thenReturn(mocklist);
-//        //then
-//        mockMvc.perform(post("/packages")).andExpect(MockMvcResultMatchers.status().isOk());
-//    }
+    public  void should_return_pickup_packages_when_give_package_id() throws Exception {
+        //given
+        List<Package> mocklist=new ArrayList<>();
+        Package packageone=new Package(1,"ZHANGSAN","199999999999",1,new Date());
+        Package packagetwo=new Package(2,"ZHANGSAN","197742984320",0,new Date());
+        Package packagethree=new Package(3,"ZHANGSAN","18312463499",0,new Date());
+        mocklist.add(packageone);
+        mocklist.add(packagetwo);
+        mocklist.add(packagethree);
+        //when
+        Mockito.when(packageRes.getPackages()).thenReturn(mocklist);
+        //then
+        mockMvc.perform(post("/packages")).andExpect(MockMvcResultMatchers.status().isOk());
+    }
 
 
 }
