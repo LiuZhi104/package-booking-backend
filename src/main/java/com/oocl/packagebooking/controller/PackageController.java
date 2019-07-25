@@ -14,11 +14,9 @@ import java.util.List;
 @RestController
 public class PackageController {
     @Autowired
-    private PackageRepository packageRepository;
-    @Autowired
     private PackageService packageService;
     @GetMapping("/packages")
-    public ResponseEntity getAllPackages(){
+    public ResponseEntity getAllPackage(){
         return  ResponseEntity.ok(packageService.getAllPackages());
     }
     @GetMapping("/packages/{id}")
@@ -34,7 +32,7 @@ public class PackageController {
        return  packageService.getPickupPackage(packageone);
     }
     @GetMapping("/packages")
-    public  ResponseEntity getAllpickup(@RequestParam Date startTime){
+    public  ResponseEntity getAllPickupPackage(@RequestParam Date startTime){
         return packageService.getAllPickup(startTime);
     }
 

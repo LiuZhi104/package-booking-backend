@@ -5,11 +5,12 @@ import com.oocl.packagebooking.repository.PackageRepository;
 import com.oocl.packagebooking.service.PackageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-
+@Service
 public class PackageServiceIml implements PackageService {
     @Autowired
     private PackageRepository packageRepository;
@@ -43,7 +44,7 @@ public class PackageServiceIml implements PackageService {
 
     @Override
     public ResponseEntity getAllPickup(Date startTime) {
-        List<Package> packages=packageRepository.getAllPickup(startTime);
+        List<Package> packages=packageRepository.getAllByStartTime(startTime);
         return  ResponseEntity.ok(packages);
     }
 }

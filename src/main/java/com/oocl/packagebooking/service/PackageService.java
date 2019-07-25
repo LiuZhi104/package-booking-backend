@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
-@Service
 public interface PackageService {
      List<Package> getAllPackages();
      List<Package> getQueryPackge(long id);
