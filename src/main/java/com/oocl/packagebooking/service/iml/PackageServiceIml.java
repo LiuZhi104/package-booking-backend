@@ -6,6 +6,7 @@ import com.oocl.packagebooking.service.PackageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 
+import java.util.Collections;
 import java.util.List;
 
 public class PackageServiceIml implements PackageService {
@@ -16,4 +17,11 @@ public class PackageServiceIml implements PackageService {
         List<Package> packages=packageRepository.findAll();
         return packages;
     }
+
+    @Override
+    public List<Package> getQueryPackge(long id) {
+        List<Package> queryPackages=packageRepository.findAllById(Collections.singleton(id));
+        return  queryPackages;
+    }
+
 }

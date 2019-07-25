@@ -1,6 +1,8 @@
 package com.oocl.packagebooking.controller;
 
+import com.oocl.packagebooking.model.Package;
 import com.oocl.packagebooking.repository.PackageRepository;
+import com.oocl.packagebooking.res.PackageRes;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -9,6 +11,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -16,12 +20,24 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class PackageTest {
+public class PackageControllerTest {
     @Autowired
     private PackageRepository packageRepository;
+    @Autowired
+    private PackageRes packageRes;
     @Autowired
     private MockMvc mockMvc;
     public void should_return_all_pakages_when_find() throws Exception {
         mockMvc.perform(get("/pakages")).andExpect(MockMvcResultMatchers.status().isOk());
+    }
+    public  void should_return_all_query_packages_when_give_package_id() throws Exception {
+        List<Package> mocklist=new ArrayList<>();
+        Package packageone=new Package(1,"ZHANGSAN","199999999999",1,new Date());
+        Package packagetwo=new Package(2,"ZHANGSAN","197742984320",0,new Date());
+        Package packagethree=new Package(3,"ZHANGSAN","18312463499",0,new Date());
+        mocklist.add(packageone);
+        mocklist.add(packagetwo);
+        mocklist.add(packagethree);
+        mockMvc.perform(get("/packages/1")).andExpect(MockMvcResultMatchers.status().isOk());
     }
 }
