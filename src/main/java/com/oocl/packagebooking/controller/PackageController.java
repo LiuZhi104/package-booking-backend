@@ -16,24 +16,21 @@ public class PackageController {
     @Autowired
     private PackageService packageService;
     @GetMapping("/packages")
-    public ResponseEntity getAllPackage(){
-        return  ResponseEntity.ok(packageService.getAllPackages());
-    }
-    @GetMapping("/packages/{id}")
-    public ResponseEntity getQueryPackages(@PathVariable long id){
-        return  ResponseEntity.ok(packageService.getQueryPackge(id));
+    public ResponseEntity getAllPackage(@RequestParam(defaultValue = "") String status){
+        if(status.equals("")) {
+            return ResponseEntity.ok(packageService.getAllPackages());
+        } else {
+            return ResponseEntity.ok(packageService.findPackagesByStatus(status));
+        }
     }
     @PutMapping("/packages/{id}")
-    public  ResponseEntity updateQueryPackage(@PathVariable long id){
-        return packageService.updateQueryPackage(id);
+    public Package updatePackage(@RequestBody Package packageone, @PathVariable long id){
+        return packageService.updatePackage(id, packageone);
     }
+
     @PostMapping("/packages")
-    public  ResponseEntity postPickupPackage(@RequestBody Package packageone){
-       return  packageService.getPickupPackage(packageone);
-    }
-    @GetMapping("/packages")
-    public  ResponseEntity getAllPickupPackage(@RequestParam Date startTime){
-        return packageService.getAllPickup(startTime);
+    public Package createPackage(@RequestBody Package packageone) {
+        return packageService.postPackage(packageone);
     }
 
 

@@ -8,9 +8,12 @@ import java.util.Date;
 import java.util.List;
 public interface PackageService {
      List<Package> getAllPackages();
-     List<Package> getQueryPackge(long id);
-    ResponseEntity updateQueryPackage(long id);
-    ResponseEntity getPickupPackage(Package packageone);
-    ResponseEntity getAllPickup(Date startTime);
+     List<Package> findPackagesByStatus( String status);
+    Package updatePackage(long id, Package packageone);
+    Package postPackage(Package packageone);
+//     List<Package> getQueryPackge(long id);
+//    ResponseEntity updateQueryPackage(long id);
+//    ResponseEntity getPickupPackage(Package packageone);
+//    ResponseEntity getAllPickup(Date startTime);
 
 }

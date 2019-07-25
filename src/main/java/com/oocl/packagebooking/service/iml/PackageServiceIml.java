@@ -1,5 +1,7 @@
 package com.oocl.packagebooking.service.iml;
 
+import com.oocl.packagebooking.exception.ErrorBookingTimeException;
+import com.oocl.packagebooking.exception.NoSuchPackageException;
 import com.oocl.packagebooking.model.Package;
 import com.oocl.packagebooking.repository.PackageRepository;
 import com.oocl.packagebooking.service.PackageService;
@@ -7,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -21,30 +26,26 @@ public class PackageServiceIml implements PackageService {
     }
 
     @Override
-    public List<Package> getQueryPackge(long id) {
-        List<Package> queryPackages=packageRepository.findAllById(Collections.singleton(id));
-        return  queryPackages;
+    public List<Package> findPackagesByStatus(String status) {
+        return packageRepository.findPackagesByStatus(status);
     }
 
     @Override
-    public ResponseEntity updateQueryPackage(long id) {
-        int status=packageRepository.update(id);
-        Package packageone=packageRepository.findById(id).get();
-        if (status == 1) {
-            return ResponseEntity.ok(packageone);
+    public Package updatePackage(long id, Package packageone) {
+        long pID = packageRepository.findById(id).orElseThrow(NoSuchPackageException::new).getId();
+        long startTime = packageone.getStartTime();
+        LocalDateTime localDateTime = Instant.ofEpochMilli(startTime).atZone(ZoneId.systemDefault()).toLocalDateTime();
+        int hour = localDateTime.getHour();
+        if (hour > 9 && hour < 20) {
+            packageone.setId(id);
+            return packageRepository.save(packageone);
+        } else {
+            throw new ErrorBookingTimeException();
         }
-        return ResponseEntity.notFound().build();
+    }
+    @Override
+    public Package postPackage(Package packageone) {
+        return packageRepository.saveAndFlush(packageone);
     }
 
-    @Override
-    public ResponseEntity getPickupPackage(Package packageone) {
-        Package newPackage=packageRepository.save(packageone);
-        return ResponseEntity.ok(newPackage);
-    }
-
-    @Override
-    public ResponseEntity getAllPickup(Date startTime) {
-        List<Package> packages=packageRepository.getAllByStartTime(startTime);
-        return  ResponseEntity.ok(packages);
-    }
 }

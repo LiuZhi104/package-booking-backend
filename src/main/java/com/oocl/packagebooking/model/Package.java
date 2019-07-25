@@ -1,8 +1,6 @@
 package com.oocl.packagebooking.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -10,28 +8,18 @@ public class Package {
     @Id
     @GeneratedValue
     private long id;
-    private  String custumerName;
-    private  String phoneNum;
-    private int status;
-    private Date startTime;
+    @OneToOne
+    private Customer customer;
+    @Column(nullable = false)
+    private String status;
+    private long startTime;
 
-    public Package(long id, String custumerName, String phoneNum, int status, Date startTime) {
-        this.id = id;
-        this.custumerName = custumerName;
-        this.phoneNum = phoneNum;
-        this.status = status;
-        this.startTime = startTime;
+    public Package() {
     }
 
-    @Override
-    public String toString() {
-        return "Package{" +
-                "id=" + id +
-                ", custumerName='" + custumerName + '\'' +
-                ", phoneNum='" + phoneNum + '\'' +
-                ", status=" + status +
-                ", startTime=" + startTime +
-                '}';
+    public Package(String status, long startTime) {
+        this.status = status;
+        this.startTime = startTime;
     }
 
     public long getId() {
@@ -42,35 +30,28 @@ public class Package {
         this.id = id;
     }
 
-    public String getCustumerName() {
-        return custumerName;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setCustumerName(String custumerName) {
-        this.custumerName = custumerName;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
-    public String getPhoneNum() {
-        return phoneNum;
-    }
-
-    public void setPhoneNum(String phoneNum) {
-        this.phoneNum = phoneNum;
-    }
-
-    public int getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
-    public Date getStartTime() {
+    public long getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Date startTime) {
+    public void setStartTime(long startTime) {
         this.startTime = startTime;
     }
 }
+
